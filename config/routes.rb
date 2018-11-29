@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  get '/' => 'static_pages#index'
-  get '/home' => 'static_pages#index'
   devise_for :users
-  get '/index' => 'users#index'
+  devise_scope :user do
+    authenticated :user do
+      root 'users#show', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+  get '/users' => 'users#index'
   get '/users/:id' => 'users#show'
 end

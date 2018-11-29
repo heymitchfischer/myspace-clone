@@ -3,19 +3,24 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autocomplete: "name" %>
-</div>
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autocomplete: "name" %>
+  </div>
 
-<div class="field">
-    <%= f.label :age %><br />
-    <%= f.number_field :age, autocomplete: "age" %>
-</div>
+  <div class="field">
+      <%= f.label :age %><br />
+      <%= f.number_field :age, autocomplete: "age" %>
+  </div>
 
-<div class="field">
-    <%= f.label :biography %><br />
-    <%= f.text_field :biography, autocomplete: "biography" %>
-</div>
+  <div class="field">
+      <%= f.label :biography %><br />
+      <%= f.text_field :biography, autocomplete: "biography" %>
+  </div>
+
+   <div>
+  <%= f.label "add profile picture" %><br />
+  <%= file_field_tag(:image) %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />

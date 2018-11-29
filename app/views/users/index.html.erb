@@ -1,7 +1,13 @@
 <h1>This is a Test Page</h1>
 
-  <% @users.each do |user| %>
-    <li>
+<% if @user_name %>
+<p>Displaying <%= @users.length %> result(s)</p>
+<% elsif @error_message %>
+<p><%= @error_message %></p>
+<% end %>
+
+<% @users.each do |user| %>
+  <li>
       <%= link_to("#{user.email}", "/users/#{user.id}") %>
-    </li>
-   <% end %>
+  </li>
+<% end %>

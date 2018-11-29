@@ -6,17 +6,46 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <% if user_signed_in? %>
+      <li class="nav-item <%= 'active' if current_page?("/index") %>">
+        <%= link_to('/index', class: "nav-link") do %>
+          All Users<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/index") %>
+        <% end %>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+      <li class="nav-item <%= 'active' if current_page?("/users/:id") %>">
+        <%= link_to("/users/#{current_user.id}", class: "nav-link") do %>
+          Your Profile<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/users/:id") %>
+        <% end %>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item <%= 'active' if current_page?(edit_user_registration_path) %>">
+        <%= link_to(edit_user_registration_path, class: "nav-link") do %>
+          Edit Profile<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?(edit_user_registration_path) %>
+        <% end %>
+      </li>
+      <li class="nav-item <%= 'active' if current_page?(destroy_user_session_path) %>">
+        <%= link_to(destroy_user_session_path, method: :delete, class: "nav-link") do %>
+          Log Out<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?(destroy_user_session_path) %>
+        <% end %>
+      </li>
+      <% else %>
+        <li class="nav-item <%= 'active' if current_page?(new_user_registration_path) %>">
+          <%= link_to(new_user_registration_path, class: "nav-link") do %> 
+            Sign Up<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?(new_user_registration_path) %>
+          <% end %>
+        </li>
+        <li class="nav-item <%= 'active' if current_page?(new_user_session_path) %>">
+          <%= link_to(new_user_session_path, class: "nav-link") do %>
+            Log In<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?(new_user_session_path) %>
+          <% end %>
+        </li>
+
+        <span class="sr-only">(current)</span>
+      <% end %>
+<!--       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        </a> -->
+<!--         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Action</a>
           <a class="dropdown-item" href="#">Another action</a>
           <div class="dropdown-divider"></div>
@@ -25,12 +54,16 @@
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
-      </li> 
+      </li>  -->
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
+    <%= form_tag("/index", method: :get, class: "form-inline my-2 my-lg-0") do %>
+      <input type="search" class="form-control mr-sm-2" name="name" placeholder="Search" aria-label="Search" value="<%= @name %>">
+      <input type="submit" class="btn btn-outline-success my-2 my-sm-0"value="Find">
+    <% end %>
   </div>
 </nav> 
 

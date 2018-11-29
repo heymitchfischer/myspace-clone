@@ -1,3 +1,12 @@
 <h1><%= @user.name %></h1>
 <h2><%= @user.age %></h2>
 <p><%= @user.biography %></p>
+
+
+<%= form_tag("/friend_requests", method: :post) do %>
+
+  <% @user.id %>
+  <%= hidden_field_tag(:id, @user.id) %>
+  <%= submit_tag("Send friend request!") %>
+
+ <% end %>

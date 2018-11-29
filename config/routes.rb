@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   end
   get '/users' => 'users#index'
   get '/users/:id' => 'users#show'
+  resources :friend_requests
 end

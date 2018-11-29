@@ -8,8 +8,8 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
       <li class="nav-item <%= 'active' if current_page?("/index") %>">
-        <%= link_to('/index', class: "nav-link") do %>
-          All Users<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/index") %>
+        <%= link_to('/users', class: "nav-link") do %>
+          All Users<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/users") %>
         <% end %>
       </li>
       <li class="nav-item <%= 'active' if current_page?("/users/:id") %>">
@@ -60,7 +60,7 @@
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <%= form_tag("/index", method: :get, class: "form-inline my-2 my-lg-0") do %>
+    <%= form_tag("/users", method: :get, class: "form-inline my-2 my-lg-0") do %>
       <input type="search" class="form-control mr-sm-2" name="name" placeholder="Search" aria-label="Search" value="<%= @name %>">
       <input type="submit" class="btn btn-outline-success my-2 my-sm-0"value="Find">
     <% end %>

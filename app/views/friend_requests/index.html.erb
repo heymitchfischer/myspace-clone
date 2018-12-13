@@ -1,5 +1,6 @@
-<h1>FriendRequest#index</h1>
-<p>Find me in app/views/friend_request/index.html.erb</p>
+<h2>Your pending friend requests:</h2>
 
-
-<%= FriendRequest.where(friend: current_user) %>
+<% @pending_friend_requests.each do |request| %>
+  <h4><%= request.user.name %></h4>
+  <%= link_to("Decline", "/friend_requests/#{request.id}", method: :delete, class: "btn btn-danger") %>
+<% end %>

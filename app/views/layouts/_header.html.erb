@@ -12,6 +12,9 @@
           All Users<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/users") %>
         <% end %>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/friend_requests">Friend Requests<span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item <%= 'active' if current_page?("/users/:id") %>">
         <%= link_to("/users/#{current_user.id}", class: "nav-link") do %>
           Your Profile<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/users/:id") %>
@@ -38,39 +41,11 @@
             Log In<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?(new_user_session_path) %>
           <% end %>
         </li>
-
-        <span class="sr-only">(current)</span>
       <% end %>
-<!--       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a> -->
-<!--         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>  -->
     </ul>
     <%= form_tag("/users", method: :get, class: "form-inline my-2 my-lg-0") do %>
       <input type="search" class="form-control mr-sm-2" name="name" placeholder="Search" aria-label="Search" value="<%= @name %>">
       <input type="submit" class="btn btn-outline-success my-2 my-sm-0"value="Find">
     <% end %>
   </div>
-</nav> 
-
-<% if user_signed_in? %>
-      Logged in as <strong><%= current_user.email %></strong>
-      <%= link_to('Edit Profile', edit_user_registration_path) %> | 
-      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-<% else %>
-      <%= link_to "Sign up", new_user_registration_path %> |
-      <%= link_to "Login", new_user_session_path %>
-<% end %>
-
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+</nav>

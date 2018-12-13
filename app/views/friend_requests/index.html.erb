@@ -1,0 +1,6 @@
+<h2>Your pending friend requests:</h2>
+
+<% @pending_friend_requests.each do |request| %>
+  <h4><%= request.user.name %></h4>
+  <%= link_to("Decline", "/friend_requests/#{request.id}", method: :delete, class: "btn btn-danger") %>
+<% end %>

@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   end
   get '/users' => 'users#index'
   get '/users/:id' => 'users#show'
+  get '/friend_requests' => 'friend_requests#index'
+  post '/friend_requests' => 'friend_requests#create'
+  delete '/friend_requests/:id' => 'friend_requests#destroy'
 end

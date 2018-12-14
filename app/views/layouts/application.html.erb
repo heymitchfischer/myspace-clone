@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%; margin: 0">
   <head>
 
     <title>YourSpace</title>
@@ -14,9 +14,9 @@
 
 
 
-  <body>
+  <body style="height: 100%; margin: 0">
     <%= render("layouts/header") %>
-    <div class="fluid-container" style="margin: 6rem 2rem">
+    <div class="fluid-container" style="margin: 6rem 2rem 0 2rem; min-height: 100%">
       <%= flash_messages %>
       <%= yield %>
     </div>

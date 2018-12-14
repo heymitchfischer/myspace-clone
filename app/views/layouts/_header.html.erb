@@ -7,8 +7,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
+        <li class="nav-item <%= 'active' if current_page?("/users") %>">
+          <%= link_to("/users", class: "nav-link") do %>
+            All Users<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/users") %>
+          <% end %>
+        </li>
         <li class="nav-item <%= 'active' if current_page?("/friend_requests") %>">
-          <a class="nav-link" href="/friend_requests">Friend Requests<%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/friend_requests") %></span></a>
+          <a class="nav-link" href="/friend_requests">Friend Requests <span style="color: blue">(<%= FriendRequest.where(friend: current_user).length %>)</span><%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/friend_requests") %></span></a>
         </li>
         <li class="nav-item <%= 'active' if current_page?("/users/#{current_user.id}") %>">
           <%= link_to("/users/#{current_user.id}", class: "nav-link") do %>

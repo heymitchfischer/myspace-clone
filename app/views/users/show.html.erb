@@ -1,10 +1,29 @@
-<h1><%= @user.name %></h1>
-<h2><%= @user.age %></h2>
-<p><%= @user.biography %></p>
+<div>
+  <%= @user.image.attached? ? image_tag(@user.image, class: "profile-img") : image_tag('user.png', class: "profile-img") %>
+  <h3><%= @user.name %></h1>
+  <p><%= @user.biography %></p>
 
-<% if current_user != @user %>
-  <%= form_tag("/friend_requests", method: :post) do %>
-    <%= hidden_field_tag(:id, @user.id) %>
-    <%= submit_tag("Send friend request!", class: "btn btn-primary") %>
+  <% if current_user != @user %>
+    <% if current_user.friend_circle_includes?(@user) %>
+     <%= link_to("Delete friend", "/friendships/delete_friend/#{@user.id}", method: :delete, class: "btn btn-danger") %>
+    <% elsif current_user.needs_a_response?(@user) %>
+      <h4>You have a pending friend request from <%= @user.name %>.</h4>
+      <%= link_to("Check it out here.", "/friend_requests", class: "btn btn-primary") %>
+    <% elsif current_user.invite_already_sent?(@user) %>
+      <h4>You've invited <%= @user.name %> to be your friend.</h4>
+    <% else %>
+      <%= form_tag("/friend_requests", method: :post) do %>
+        <%= hidden_field_tag(:id, @user.id) %>
+        <%= submit_tag("Send friend request!", class: "btn btn-primary") %>
+      <% end %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+<div style="clear: both; text-align: center">
+  <h3 class="text-center" style="margin: 1rem auto">Top Friends</h3>
+    <% @user.friends.each do |friend| %>
+      <%= link_to("/users/#{friend.id}") do %>
+        <%= friend.image.attached? ? image_tag(friend.image, class: "friend-img") : image_tag('user.png', class: "friend-img") %>
+      <% end %>
+    <% end %>
+</div>

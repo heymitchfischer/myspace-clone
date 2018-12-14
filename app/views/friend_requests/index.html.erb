@@ -1,6 +1,24 @@
-<h2>Your pending friend requests:</h2>
-
-<% @pending_friend_requests.each do |request| %>
-  <h4><%= request.user.name %></h4>
-  <%= link_to("Decline", "/friend_requests/#{request.id}", method: :delete, class: "btn btn-danger") %>
+<% if @pending_friend_requests.any? %>
+  <div style="margin-bottom: 28rem">
+    <h3 style="margin-bottom: 2rem">Your pending friend requests:</h3>
+    <% @pending_friend_requests.each do |request| %>
+      <div style="display: block; clear: both">
+          <%= request.user.image.attached? ? image_tag(request.user.image, class: "small-img") : image_tag('user.png', class: "small-img") %>
+          <h4 style="padding-top: 0.5rem; margin-right: 2rem; display: inline-block">
+            <%= link_to(request.user.name, "/users/#{request.user.id}") %>
+          </h4>
+          <%= link_to("Accept", "/friendships/accept_request/#{request.id}", method: :post, class: "btn btn-primary") %>
+          <%= link_to("Decline", "/friend_requests/#{request.id}", method: :delete, class: "btn btn-danger") %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Looks like no one wants to be your friend yet.</h3>
+    </div>
+    <div class="col-sm-8">
+      <%= image_tag('sad.png', class: 'sad-img') %>
+    </div>
+  </div>
 <% end %>

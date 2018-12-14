@@ -2,10 +2,10 @@
 <html>
   <head>
 
-    <title>MyspaceClone</title>
+    <title>YourSpace</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= favicon_link_tag asset_path('tom.jpg'), :rel => 'icon', :type =>  'image/jpg' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -16,8 +16,10 @@
 
   <body>
     <%= render("layouts/header") %>
-    <div class="container">
+    <div class="fluid-container" style="margin: 6rem 2rem">
+      <%= flash_messages %>
       <%= yield %>
     </div>
+    <%= render("layouts/footer") %>
   </body>
 </html>

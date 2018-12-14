@@ -1,13 +1,18 @@
-<h1>This is a Test Page</h1>
-
 <% if @user_name %>
-<p>Displaying <%= @users.length %> result(s)</p>
+  <p>Displaying <%= @users.length %> result(s)</p>
 <% elsif @error_message %>
-<p><%= @error_message %></p>
+  <p><%= @error_message %></p>
 <% end %>
 
 <% @users.each do |user| %>
-  <li>
-      <%= link_to("#{user.email}", "/users/#{user.id}") %>
-  </li>
+  <%= link_to("/users/#{user.id}") do %>
+    <div style="display: block; clear: both">
+      <%= user.image.attached? ? image_tag(user.image, class: "small-img") : image_tag('user.png', class: "small-img") %>
+      <h4 style="padding-top: 0.5rem"><%= user.name %>
+        <% if user == current_user %>
+          (You)
+        <% end %>
+      </h4>
+    </div>
+  <% end %>
 <% end %>

@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   get '/friend_requests' => 'friend_requests#index'
   post '/friend_requests' => 'friend_requests#create'
   delete '/friend_requests/:id' => 'friend_requests#destroy'
+  post '/friendships/accept_request/:request_id' => 'friendships#create'
+  delete '/friendships/delete_friend/:friend_id' => 'friendships#destroy'
 end
